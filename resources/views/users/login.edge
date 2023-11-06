@@ -1,0 +1,23 @@
+@layout('layouts/main')
+
+@section('content')
+  <form action="{{ route('users.login') }}" method="POST">
+
+    <div>
+      @!form.legend({ name: 'Email'})
+      @!form.input({ name: 'email', type: 'email' })
+    </div>
+
+    <div>
+      @!form.legend({ name: 'Password'})
+      @!form.input({ name: 'password', type: 'password' })
+    </div>
+
+    <div>
+      @form.button()
+        Entrar
+      @end
+    </div>
+  </form>
+
+@end

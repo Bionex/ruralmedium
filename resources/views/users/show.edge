@@ -1,0 +1,22 @@
+@layout('layouts/main')
+
+@section('content')
+  <div>
+    <label>
+      Email:
+    </label>
+    <span>
+      {{ user.email }}
+    </span>
+
+
+  </div>
+  @if(auth.user == user)
+  <div>
+    @form.button({ href: route('users.update')})
+      Atualizar Perfil
+    @end
+
+  </div>
+  @end
+@end

@@ -1,0 +1,14 @@
+@layout('layouts/main')
+
+@section('content')
+
+  <div class="flex flex-row justify-between items-center gap-1"></div>
+    <div>{{ post.title + "/"}}</div>
+    <div>{{ post.content + "/"}}</div>
+    <div>{{ post.user.email }}</div>
+  </div>
+
+
+
+
+@end

@@ -1,0 +1,20 @@
+@layout('layouts/main')
+
+@section('content')
+  <p>
+    Crie o seu usuário
+  </p>
+  <form action={{ route('users.store') }} method="POST">
+    <div>
+      @!form.legend({ name: 'Email'})
+      @!form.input({ name: 'email', type: 'text' })
+    </div>
+    <div>
+      @!form.legend({ name: 'Senha'})
+      @!form.input({ name: 'password', type: 'password' })
+    </div>
+    <button type="submit">
+      Criar
+    </button>
+  </form>
+@end
