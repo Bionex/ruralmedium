@@ -2,7 +2,7 @@ import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import BaseValidator from 'App/Validators/BaseValidator'
 
-export default class CreatePostValidator extends BaseValidator {
+export default class UpdateProfileValidator extends BaseValidator {
   constructor(protected ctx: HttpContextContract) {
     super()
   }
@@ -27,12 +27,13 @@ export default class CreatePostValidator extends BaseValidator {
    *    ```
    */
   public schema = schema.create({
-    title: schema.string([
+    email: schema.string.optional([
+      rules.email(),
       rules.minLength(5),
       rules.maxLength(200),
       rules.trim(),
     ]),
-    content: schema.string([
+    password: schema.string.optional([
       rules.minLength(5),
       rules.maxLength(200),
       rules.trim(),

@@ -1,7 +1,9 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import FileService from 'App/Services/FileService'
 import UserService from 'App/Services/UserService'
+import UpdateProfileValidator from 'App/Validators/UpdateProfileValidator'
 
 export default class UsersController {
   public async create({ view }: HttpContextContract) {
@@ -51,11 +53,22 @@ export default class UsersController {
 
     if(user.id == auth.user?.id){
 
+      const payload = await request.validate(UpdateProfileValidator)
+
+      console.log(payload)
+
       const email = request.input('email', undefined)
       const password = request.input('password', undefined)
 
       user.email = email ? email : user.email
       user.password = password ?  await Hash.make(password) : user.password
+
+      const fileService = new FileService()
+      const file = await fileService.create(payload.cover)
+
+      user.coverId = file.id ? file.id : user.coverId
+
+      console.log('passou na verificacao')
 
       await user.save()
     }

@@ -6,6 +6,8 @@
     <div>{{ post.title + "/"}}</div>
     <div>{{ post.content + "/"}}</div>
     <div>{{ post.user.email }}</div>
+
+    <img src="{{ route('files.show', { id: post.coverId }) }}" />
   </div>
 
 

@@ -4,18 +4,18 @@
   <p>
     Atualize o usuário
   </p>
-  <form action="{{ route('users.patch', { id: user.id }, { qs: { _method: 'PATCH' }}) }}" method="POST">
+  <form action="{{ route('users.patch', { id: user.id }, { qs: { _method: 'PATCH' }}) }}" method="POST" enctype="multipart/form-data">
     <div>
-      <label>
-        Email:
-      </label>
-      <input type="email" name="email" placeholder="Email" value="{{ user.email }}" />
+      @!form.legend({ name: 'Email'})
+      @!form.input({ name: 'email', type: 'text', placeholder: user.email })
     </div>
     <div>
-      <label>
-        Senha:
-      </label>
-      <input type="password" name="password" placeholder="Senha" />
+      @!form.legend({ name: 'Senha'})
+      @!form.input({ name: 'password', type: 'password' })
+    </div>
+    <div>
+      @!form.legend({ name: 'Foto de perfil'})
+      @!form.input({ name: 'cover', type: 'file' })
     </div>
     <button type="submit">
       Atualizar

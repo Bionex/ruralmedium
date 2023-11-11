@@ -19,7 +19,7 @@ export default class PostsController {
       return response.redirect().toRoute('users.showLogin', {auth: auth})
 
     const postService = new PostService()
-    const post = await postService.create(user, payload)
+    const post = await postService.create(user,payload)
 
     return response.redirect().toRoute('posts.show', { id: post.id })
   }
