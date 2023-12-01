@@ -69,6 +69,7 @@ Route.group(() => {
     Route.get('/new', 'PostsController.create').as('create')
     Route.post('/', 'PostsController.store').as('store')
     Route.get('/:id/update', 'PostsController.update').as('update')
+    Route.get(':id/delete', 'PostsController.delete').as('delete')
     Route.patch('/:id', 'PostsController.patch').as('patch')
     Route.get('/:id', 'PostsController.show').as('show')
   })

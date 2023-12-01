@@ -39,7 +39,7 @@ export default class CreatePostValidator extends BaseValidator {
     ]),
     cover: schema.file({
       size: '2mb',
-      extnames: ['jpg', 'gif', 'png'],
+      extnames: ['jpg', 'gif', 'png','jpeg'],
     }),
   })
 

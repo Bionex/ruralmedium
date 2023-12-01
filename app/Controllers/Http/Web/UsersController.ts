@@ -55,18 +55,18 @@ export default class UsersController {
 
       const payload = await request.validate(UpdateProfileValidator)
 
-      console.log(payload)
-
       const email = request.input('email', undefined)
       const password = request.input('password', undefined)
 
       user.email = email ? email : user.email
       user.password = password ?  await Hash.make(password) : user.password
 
-      const fileService = new FileService()
-      const file = await fileService.create(payload.cover)
+      if(payload.cover){
+        const fileService = new FileService()
+        const file = await fileService.create(payload.cover)
 
-      user.coverId = file.id ? file.id : user.coverId
+        user.coverId = file.id ? file.id : user.coverId
+      }
 
       console.log('passou na verificacao')
 

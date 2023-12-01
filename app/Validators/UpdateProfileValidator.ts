@@ -34,11 +34,11 @@ export default class UpdateProfileValidator extends BaseValidator {
       rules.trim(),
     ]),
     password: schema.string.optional([
-      rules.minLength(5),
+      rules.minLength(1),
       rules.maxLength(200),
       rules.trim(),
     ]),
-    cover: schema.file({
+    cover: schema.file.optional({
       size: '2mb',
       extnames: ['jpg', 'gif', 'png'],
     }),

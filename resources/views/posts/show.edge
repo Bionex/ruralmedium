@@ -2,12 +2,18 @@
 
 @section('content')
 
-  <div class="flex flex-row justify-between items-center gap-1"></div>
-    <div>{{ post.title + "/"}}</div>
-    <div>{{ post.content + "/"}}</div>
-    <div>{{ post.user.email }}</div>
+  <div class="flex flex-col justify-between items-center gap-1">
+    <div class="text-6xl"">{{ post.title}}</div>
+    <div>{{ post.content}}</div>
+    <div>{{ post.user.email}}</div>
 
     <img src="{{ route('files.show', { id: post.coverId }) }}" />
+
+    @if(post.user.email == auth.user.email)
+      @form.button({ href: route('posts.delete', { id: post.id }) })
+          Deletar post
+      @end
+    @end
   </div>
 
 

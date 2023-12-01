@@ -10,9 +10,9 @@
     </span>
 
 
-
-    <img src="{{ route('files.show', { id: user.coverId }) }}" />
-
+    @if(user.coverId)
+      <img src="{{ route('files.show', { id: user.coverId }) }}" />
+    @end
 
   </div>
   @if(auth.user == user)
