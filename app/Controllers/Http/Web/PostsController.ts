@@ -59,4 +59,18 @@ export default class PostsController {
 
     return response.redirect().toRoute('posts.index')
   }
+
+  public async like({ params, auth, response}: HttpContextContract) {
+    const post = await Post.findOrFail(params.id)
+
+
+
+    const user = auth.user
+    if(user != null){
+      const service = new PostService()
+      const liked = await service.like(user, post)
+      return response.redirect().back()
+    }
+
+  }
 }

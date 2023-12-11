@@ -2,9 +2,37 @@
 
 @section('content')
 
+  <script>
+    window.document.onload = function(e) {
+    }
+
+    async function likebutton(url) {
+      const button = document.getElementById('like')
+      const response = await fetch(url)
+
+      const data = await response.json()
+
+      if(data.liked) {
+        button.classList.replace('text-black', 'text-red-400')
+      } else {
+        button.classList.replace('text-red-400', 'text-black')
+      }
+    }
+  </script>
+
   <div class="flex flex-col justify-between items-center gap-1">
-    <div class="text-6xl"">{{ post.title}}</div>
+    <a href="/posts/like/${post_id}">
+      <div id="like" class="text-black">Teste de Likeee</div>
+    </a>
+
+    @form.button({href: route('posts.like', {id: post.id}) })
+      Like post
+    @end
+
+    <div class="text-6xl">{{ post.title}}</div>
+
     <div>{{ post.content}}</div>
+
     <div>{{ post.user.email}}</div>
 
     <img src="{{ route('files.show', { id: post.coverId }) }}" />
