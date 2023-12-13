@@ -1,6 +1,5 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
 import Post from 'App/Models/Post'
 import User from 'App/Models/User'
 import FileService from 'App/Services/FileService'
@@ -93,7 +92,8 @@ export default class UsersController {
   }
 
   public async favorites({view, auth}: HttpContextContract){
-    const posts = []
+    const posts = auth.user?.related('posts').query().where('user_id', auth.user.id)
+    console.log(posts)
 
     return view.render('users/favorites', {posts: posts, auth: auth})
   }
