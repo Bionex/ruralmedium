@@ -89,6 +89,7 @@ export default class UsersController {
   public async favorites({view, auth}: HttpContextContract){
     const posts = auth.user?.related('posts').query()
     console.log(posts)
+
     //return view.render('users/favorites', {posts: posts, auth: auth})
   }
 
