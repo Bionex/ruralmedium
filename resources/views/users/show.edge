@@ -1,26 +1,42 @@
 @layout('layouts/main')
 
 @section('content')
-  <div>
-    <label>
-      Email:
-    </label>
-    <span>
-      {{ user.email }}
-    </span>
+  <div class="flex flex-col">
+    <div>
+      <label>
+        Email:
+      </label>
+      <span>
+        {{ user.email }}
+      </span>
 
 
-    @if(user.coverId)
-      <img src="{{ route('files.show', { id: user.coverId }) }}" />
+      @if(user.coverId)
+        <img src="{{ route('files.show', { id: user.coverId }) }}" />
+      @end
+
+    </div>
+    @if(auth.user == user)
+    <div>
+      @form.button({ href: route('users.update')})
+        Atualizar Perfil
+      @end
+
+    </div>
     @end
 
-  </div>
-  @if(auth.user == user)
-  <div>
-    @form.button({ href: route('users.update')})
-      Atualizar Perfil
-    @end
 
+    <div style="margin-top:20px">
+      <div class="flex flex-col">
+        LISTANDO POSTS DESSE USUARIO
+        @each(post in posts)
+          <div class="flex flex-row">
+            @form.button( {href: route('posts.show', {id: post.id}) })
+              <div>post: {{ post.title }}</div>
+            @end
+          </div>
+        @end
+        </div>
+    </div>
   </div>
-  @end
 @end

@@ -1,5 +1,7 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database'
+import Post from 'App/Models/Post'
 import User from 'App/Models/User'
 import FileService from 'App/Services/FileService'
 import UserService from 'App/Services/UserService'
@@ -36,7 +38,11 @@ export default class UsersController {
   public async show({ params, view, auth }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
 
-    return view.render('users/show', { user: user, auth: auth})
+    const posts = await Post.query().where('user_id', user.id)
+
+    console.log(posts[0].content)
+
+    return view.render('users/show', { user: user, auth: auth, posts: posts})
   }
 
   public async update({ response, view, auth}: HttpContextContract) {
@@ -87,10 +93,9 @@ export default class UsersController {
   }
 
   public async favorites({view, auth}: HttpContextContract){
-    const posts = auth.user?.related('posts').query()
-    console.log(posts)
+    const posts = []
 
-    //return view.render('users/favorites', {posts: posts, auth: auth})
+    return view.render('users/favorites', {posts: posts, auth: auth})
   }
 
   public async login({ request, response, auth, session }: HttpContextContract) {
@@ -121,7 +126,9 @@ export default class UsersController {
     if(user == undefined)
       return response.redirect().toRoute('users.showLogin')
 
-    return view.render('users/show', {user: user, auth: auth})
+    const posts = await Post.query().where('user_id', user.id)
+
+    return view.render('users/show', {user: user, auth: auth, posts: posts} )
   }
 
 }
