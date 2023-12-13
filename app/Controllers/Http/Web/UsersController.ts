@@ -86,6 +86,12 @@ export default class UsersController {
     return view.render('users/login', {auth: auth})
   }
 
+  public async favorites({view, auth}: HttpContextContract){
+    const posts = auth.user?.related('posts').query()
+    console.log(posts)
+    //return view.render('users/favorites', {posts: posts, auth: auth})
+  }
+
   public async login({ request, response, auth, session }: HttpContextContract) {
     const email = await request.input('email')
     const password = await request.input('password')

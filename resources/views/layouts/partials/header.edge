@@ -18,6 +18,10 @@
 
 
       @if(auth.user)
+        @form.button({ href: route('users.favorites')})
+          Favoritos
+        @end
+
         @form.button({ href: route('users.logout') })
           Logout
         @end

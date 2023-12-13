@@ -48,12 +48,9 @@ export default class PostsController {
   public async delete({params, response , auth}: HttpContextContract){
 
     const post = await Post.findOrFail(params.id)
-
-    console.log(post.user, auth.user)
     const user = await User.findOrFail(post.userId)
 
     if(user.email == auth.user?.email){
-      console.log('post deletado')
       post.delete()
     }
 
@@ -73,4 +70,5 @@ export default class PostsController {
     }
 
   }
+
 }

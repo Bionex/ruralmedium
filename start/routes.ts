@@ -55,6 +55,7 @@ Route.group(() => {
     Route.post('/login', "UsersController.login").as('login')
     Route.get('/logout', 'UsersController.logout').as('logout')
     Route.get('/self', 'UsersController.self').as('self')
+    Route.get('/favorites', 'UsersController.favorites').as('favorites')
 
 
     Route.get('/self/update', 'UsersController.update').as('update')
